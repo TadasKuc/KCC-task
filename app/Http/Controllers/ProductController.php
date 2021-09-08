@@ -29,13 +29,14 @@ class ProductController extends Controller
         $product->title       = $request->get('title');
         $product->description = $request->get('description');
         $product->price       = $request->get('price');
-
         $product->save();
 
         $image = new Image();
         $image->product_id = $product->id;
         $image->image_name = $this->savePhoto($request);
         $image->save();
+
+        return redirect(route('products.index'));
     }
 
     public function show(Product $product)

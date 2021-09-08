@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use App\Models\Product;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,9 +38,11 @@ class ProductController extends Controller
         $image->save();
     }
 
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        return view('products.product-show', [
+            'product' => $product
+        ]);
     }
 
     public function edit(Product $product)

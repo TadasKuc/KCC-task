@@ -35,7 +35,7 @@ class ProductController extends Controller
 
         $image = new Image();
         $image->product_id = $product->id;
-        $image->path = $this->savePhoto($request);
+        $image->image_name = $this->savePhoto($request);
         $image->save();
     }
 
@@ -53,10 +53,10 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        $product->title       = $request->get('title');
-        $product->description = $request->get('description');
-        $product->price       = $request->get('price');
-        $product->image->path = $this->savePhoto($request);
+        $product->title             = $request->get('title');
+        $product->description       = $request->get('description');
+        $product->price             = $request->get('price');
+        $product->image->image_name = $this->savePhoto($request);
         $product->push();
     }
 

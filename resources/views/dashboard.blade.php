@@ -14,4 +14,19 @@
             </div>
         </div>
     </div>
+    @foreach($products as $product)
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{asset('storage/images/'.$product->image->path) }}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"> {{$product -> title}}</h5>
+                <p class="card-text"> {{$product -> description}}.</p>
+                <a href="#" class="btn btn-primary">More info</a>
+            </div>
+            <form action="{{ route('products.destroy' , ['product' => $product->id]) }}" method="POST">
+                @method('DELETE')
+                @csrf
+                <input class="btn btn-outline-danger" type="Submit" value="Delete">
+            </form>
+        </div>
+    @endforeach
 </x-app-layout>

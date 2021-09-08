@@ -13,7 +13,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        return view('welcome', [
+        return view('dashboard', [
             'products' => Product::all()
         ]);
     }
@@ -62,7 +62,11 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->image()->delete();
+        $product->delete();
+
+        return redirect(route('products.index'));
     }
 
     public function savePhoto($request)

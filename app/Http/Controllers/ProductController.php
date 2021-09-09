@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Managers\ProductManager;
-use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,13 +17,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+        'products' => Product::all()
+    ]);
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', [
+        'products' => Product::query()->where('user_id', '=', Auth::user()->id)->get()
+    ]);
 })->middleware(['auth'])->name('dashboard');
 
-Route::resource('/products', ProductController::class);
+Route::resource('/products', ProductController::class)->middleware(['auth']);
+Route::get('/products/{product}', [ProductController::class, 'show']);
 
 require __DIR__.'/auth.php';
